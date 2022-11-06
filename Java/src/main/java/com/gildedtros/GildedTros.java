@@ -15,16 +15,8 @@ class GildedTros {
             if (itemIsNotAGoodWine(item) && itemIsNotABackstagePass(item)) {
                 degradeQualityFromItemByOne(item);
             } else {
-                increaseQualityFromItemByOne(item);
-
-                if (itemIsABackstagePass(item)) {
-                    if (item.sellIn < 11) {
-                        increaseQualityFromItemByOne(item);
-                    }
-
-                    if (item.sellIn < 6) {
-                        increaseQualityFromItemByOne(item);
-                    }
+                if (itemIsNotABackstagePass(item)) {
+                    increaseQualityFromItemByOne(item);
                 }
             }
 
