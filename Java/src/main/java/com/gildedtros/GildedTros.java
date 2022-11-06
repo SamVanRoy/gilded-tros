@@ -2,12 +2,16 @@ package com.gildedtros;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Optional;
+
 @AllArgsConstructor
 class GildedTros {
     Item[] items;
 
     public void updateInventory() {
         for (Item item : items) {
+            updateQualityFromItem(item);
+
             if (itemIsNotAGoodWine(item) && itemIsNotABackstagePass(item)) {
                 degradeQualityFromItemByOne(item);
             } else {
@@ -40,6 +44,11 @@ class GildedTros {
                 }
             }
         }
+    }
+
+    private void updateQualityFromItem(Item item) {
+        Optional.ofNullable(ItemWithQualityFactory.getItemWithQuality(item))
+                .ifPresent(ItemWithQuality::updateQuality);
     }
 
     private boolean itemIsABackstagePass(Item item) {
