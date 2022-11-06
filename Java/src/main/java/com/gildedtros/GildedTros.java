@@ -11,23 +11,23 @@ class GildedTros {
             if (itemIsNotAGoodWine(item) && itemIsNotABackstagePass(item)) {
                 if (item.quality > 0) {
                     if (itemIsNotALegendaryItem(item)) {
-                        item.quality = item.quality - 1;
+                        item.quality -= 1;
                     }
                 }
             } else {
                 if (item.quality < 50) {
-                    item.quality = item.quality + 1;
+                    item.quality += 1;
 
                     if (itemIsABackstagePass(item)) {
                         if (item.sellIn < 11) {
                             if (item.quality < 50) {
-                                item.quality = item.quality + 1;
+                                item.quality += 1;
                             }
                         }
 
                         if (item.sellIn < 6) {
                             if (item.quality < 50) {
-                                item.quality = item.quality + 1;
+                                item.quality += 1;
                             }
                         }
                     }
@@ -35,7 +35,7 @@ class GildedTros {
             }
 
             if (itemIsNotALegendaryItem(item)) {
-                item.sellIn = item.sellIn - 1;
+                item.sellIn -= 1;
             }
 
             if (item.sellIn < 0) {
@@ -43,7 +43,7 @@ class GildedTros {
                     if (itemIsNotABackstagePass(item)) {
                         if (item.quality > 0) {
                             if (itemIsNotALegendaryItem(item)) {
-                                item.quality = item.quality - 1;
+                                item.quality -= 1;
                             }
                         }
                     } else {
@@ -51,7 +51,7 @@ class GildedTros {
                     }
                 } else {
                     if (item.quality < 50) {
-                        item.quality = item.quality + 1;
+                        item.quality += 1;
                     }
                 }
             }
