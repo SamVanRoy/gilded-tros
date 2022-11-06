@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 class GildedTros {
     Item[] items;
 
-    public void updateQuality() {
+    public void updateInventory() {
         for (Item item : items) {
             if (!item.name.equals("Good Wine")
                     && !item.name.equals("Backstage passes for Re:Factor")

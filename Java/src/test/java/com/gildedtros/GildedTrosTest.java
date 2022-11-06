@@ -18,11 +18,11 @@ class GildedTrosTest {
     class ItemSellInDecrementsCorrectly {
 
         @Test
-        void givenAnItemWithASellIn_whenUpdateQuality_thenSellInFromItemDecrementedWith1() {
+        void givenAnItemWithASellIn_whenUpdateInventory_thenSellInFromItemDecrementedWith1() {
             GildedTros app = newGildedTros("Jupke", 10, 40);
             Item[] expectedItems = createItems("Jupke", 9, 40);
 
-            app.updateQuality();
+            app.updateInventory();
 
             assertThat(app.items[0].sellIn).isEqualTo(expectedItems[0].sellIn);
         }
@@ -33,41 +33,41 @@ class GildedTrosTest {
     class ItemQualityDegradesCorrectly {
 
         @Test
-        void givenAnItemWithAQuality_whenUpdateQuality_thenQualityFromItemDegradedWith1() {
+        void givenAnItemWithAQuality_whenUpdateInventory_thenQualityFromItemDegradedWith1() {
             GildedTros app = newGildedTros("Jupke", 10, 40);
             Item[] expectedItems = createItems("Jupke", 10, 39);
 
-            app.updateQuality();
+            app.updateInventory();
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
         }
 
         @Test
-        void givenTheSellByDateHasPassed_whenUpdateQuality_thenQualityDegradesTwiceAsFast() {
+        void givenTheSellByDateHasPassed_whenUpdateInventory_thenQualityDegradesTwiceAsFast() {
             GildedTros app = newGildedTros("Jupke", -1, 40);
             Item[] expectedItems = createItems("Jupke", -1, 38);
 
-            app.updateQuality();
+            app.updateInventory();
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
         }
 
         @Test
-        void givenALegendaryItem_whenUpdateQuality_thenQualityFromItemNotDegraded() {
+        void givenALegendaryItem_whenUpdateInventory_thenQualityFromItemNotDegraded() {
             GildedTros app = newGildedTros("B-DAWG Keychain", 10, 80);
             Item[] expectedItems = createItems("B-DAWG Keychain", 10, 80);
 
-            app.updateQuality();
+            app.updateInventory();
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
         }
 
         @Test
-        void givenALegendaryItemWhereTheSellByDateHasPassed_whenUpdateQuality_thenQualityFromItemNotDegraded() {
+        void givenALegendaryItemWhereTheSellByDateHasPassed_whenUpdateInventory_thenQualityFromItemNotDegraded() {
             GildedTros app = newGildedTros("B-DAWG Keychain", -1, 80);
             Item[] expectedItems = createItems("B-DAWG Keychain", -1, 80);
 
-            app.updateQuality();
+            app.updateInventory();
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
         }
@@ -79,12 +79,12 @@ class GildedTrosTest {
 
         @ParameterizedTest
         @MethodSource("provideSellInWithAddedQualityForGoodWine")
-        void givenTheItemGoodWineWithGivenSellIn_whenUpdateQuality_thenQualityFromItemIncreasedWithGivenValue(int sellIn, int addedQuality) {
+        void givenTheItemGoodWineWithGivenSellIn_whenUpdateInventory_thenQualityFromItemIncreasedWithGivenValue(int sellIn, int addedQuality) {
             int initialQuality = 40;
             GildedTros app = newGildedTros("Good Wine", sellIn, initialQuality);
             Item[] expectedItems = createItems("Good Wine", sellIn, initialQuality + addedQuality);
 
-            app.updateQuality();
+            app.updateInventory();
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
         }
@@ -102,12 +102,12 @@ class GildedTrosTest {
 
         @ParameterizedTest
         @MethodSource("provideSellInWithAddedQualityForBackstagePassItems")
-        void givenABackstagePassItemWithGivenSellIn_whenUpdateQuality_thenQualityFromItemIncreasedWithGivenValue(int sellIn, int addedQuality) {
+        void givenABackstagePassItemWithGivenSellIn_whenUpdateInventory_thenQualityFromItemIncreasedWithGivenValue(int sellIn, int addedQuality) {
             int initialQuality = 40;
             GildedTros app = newGildedTros("Backstage passes for Re:Factor", sellIn, initialQuality);
             Item[] expectedItems = createItems("Backstage passes for Re:Factor", sellIn, initialQuality + addedQuality);
 
-            app.updateQuality();
+            app.updateInventory();
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
         }
@@ -127,11 +127,11 @@ class GildedTrosTest {
 
         @ParameterizedTest
         @MethodSource("provideSellInForBackstagePassItems")
-        void givenABackstagePassItemWithGivenSellIn_whenUpdateQuality_thenQualityFromItemDroppedTo0(int sellIn) {
+        void givenABackstagePassItemWithGivenSellIn_whenUpdateInventory_thenQualityFromItemDroppedTo0(int sellIn) {
             GildedTros app = newGildedTros("Backstage passes for Re:Factor", sellIn, 40);
             Item[] expectedItems = createItems("Backstage passes for Re:Factor", sellIn, 0);
 
-            app.updateQuality();
+            app.updateInventory();
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
         }
