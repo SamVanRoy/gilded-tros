@@ -15,21 +15,15 @@ class GildedTros {
                     }
                 }
             } else {
-                if (item.quality < 50) {
-                    item.quality += 1;
+                increaseQualityFromItemByOne(item);
 
-                    if (itemIsABackstagePass(item)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality += 1;
-                            }
-                        }
+                if (itemIsABackstagePass(item)) {
+                    if (item.sellIn < 11) {
+                        increaseQualityFromItemByOne(item);
+                    }
 
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality += 1;
-                            }
-                        }
+                    if (item.sellIn < 6) {
+                        increaseQualityFromItemByOne(item);
                     }
                 }
             }
@@ -50,9 +44,7 @@ class GildedTros {
                         item.quality = 0;
                     }
                 } else {
-                    if (item.quality < 50) {
-                        item.quality += 1;
-                    }
+                    increaseQualityFromItemByOne(item);
                 }
             }
         }
@@ -72,5 +64,11 @@ class GildedTros {
 
     private boolean itemIsNotAGoodWine(Item item) {
         return !item.name.equals("Good Wine");
+    }
+
+    private void increaseQualityFromItemByOne(Item item) {
+        if (item.quality < 50) {
+            item.quality += 1;
+        }
     }
 }
