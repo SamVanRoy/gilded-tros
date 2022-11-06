@@ -23,6 +23,21 @@ class GildedTrosTest {
         }
     }
 
+    @Nested
+    @DisplayName("Item quality degrades correctly")
+    class ItemQualityDegradesCorrectly {
+
+        @Test
+        void givenAnItemWithAQuality_whenUpdateQuality_thenQualityFromItemDegradedWith1() {
+            GildedTros app = newGildedTros("Jupke", 10, 40);
+            Item[] expectedItems = createItems("Jupke", 10, 39);
+
+            app.updateQuality();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+    }
+
     private GildedTros newGildedTros(String itemName, int itemSellIn, int itemQuality) {
         Item[] item = createItems(itemName, itemSellIn, itemQuality);
         return new GildedTros(item);
