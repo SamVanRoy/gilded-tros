@@ -51,6 +51,26 @@ class GildedTrosTest {
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
         }
+
+        @Test
+        void givenALegendaryItem_whenUpdateQuality_thenQualityFromItemNotDegraded() {
+            GildedTros app = newGildedTros("B-DAWG Keychain", 10, 80);
+            Item[] expectedItems = createItems("B-DAWG Keychain", 10, 80);
+
+            app.updateQuality();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
+        @Test
+        void givenALegendaryItemWhereTheSellByDateHasPassed_whenUpdateQuality_thenQualityFromItemNotDegraded() {
+            GildedTros app = newGildedTros("B-DAWG Keychain", -1, 80);
+            Item[] expectedItems = createItems("B-DAWG Keychain", -1, 80);
+
+            app.updateQuality();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
     }
 
     @Nested
