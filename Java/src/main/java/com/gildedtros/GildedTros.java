@@ -8,9 +8,7 @@ class GildedTros {
 
     public void updateInventory() {
         for (Item item : items) {
-            if (!item.name.equals("Good Wine")
-                    && !item.name.equals("Backstage passes for Re:Factor")
-                    && !item.name.equals("Backstage passes for HAXX")) {
+            if (!item.name.equals("Good Wine") && itemIsNotABackstagePass(item)) {
                 if (item.quality > 0) {
                     if (!item.name.equals("B-DAWG Keychain")) {
                         item.quality = item.quality - 1;
@@ -20,7 +18,7 @@ class GildedTros {
                 if (item.quality < 50) {
                     item.quality = item.quality + 1;
 
-                    if (item.name.equals("Backstage passes for Re:Factor") || item.name.equals("Backstage passes for HAXX")) {
+                    if (itemIsABackstagePass(item)) {
                         if (item.sellIn < 11) {
                             if (item.quality < 50) {
                                 item.quality = item.quality + 1;
@@ -42,7 +40,7 @@ class GildedTros {
 
             if (item.sellIn < 0) {
                 if (!item.name.equals("Good Wine")) {
-                    if (!item.name.equals("Backstage passes for Re:Factor") && !item.name.equals("Backstage passes for HAXX")) {
+                    if (itemIsNotABackstagePass(item)) {
                         if (item.quality > 0) {
                             if (!item.name.equals("B-DAWG Keychain")) {
                                 item.quality = item.quality - 1;
@@ -58,5 +56,13 @@ class GildedTros {
                 }
             }
         }
+    }
+
+    private boolean itemIsABackstagePass(Item item) {
+        return item.name.equals("Backstage passes for Re:Factor") || item.name.equals("Backstage passes for HAXX");
+    }
+
+    private boolean itemIsNotABackstagePass(Item item) {
+        return !itemIsABackstagePass(item);
     }
 }
