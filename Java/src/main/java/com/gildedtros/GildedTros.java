@@ -9,11 +9,7 @@ class GildedTros {
     public void updateInventory() {
         for (Item item : items) {
             if (itemIsNotAGoodWine(item) && itemIsNotABackstagePass(item)) {
-                if (item.quality > 0) {
-                    if (itemIsNotALegendaryItem(item)) {
-                        item.quality -= 1;
-                    }
-                }
+                degradeQualityFromItemByOne(item);
             } else {
                 increaseQualityFromItemByOne(item);
 
@@ -35,11 +31,7 @@ class GildedTros {
             if (item.sellIn < 0) {
                 if (itemIsNotAGoodWine(item)) {
                     if (itemIsNotABackstagePass(item)) {
-                        if (item.quality > 0) {
-                            if (itemIsNotALegendaryItem(item)) {
-                                item.quality -= 1;
-                            }
-                        }
+                        degradeQualityFromItemByOne(item);
                     } else {
                         item.quality = 0;
                     }
@@ -69,6 +61,14 @@ class GildedTros {
     private void increaseQualityFromItemByOne(Item item) {
         if (item.quality < 50) {
             item.quality += 1;
+        }
+    }
+
+    private void degradeQualityFromItemByOne(Item item) {
+        if (item.quality > 0) {
+            if (itemIsNotALegendaryItem(item)) {
+                item.quality -= 1;
+            }
         }
     }
 }
