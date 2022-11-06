@@ -8,7 +8,7 @@ class GildedTros {
 
     public void updateInventory() {
         for (Item item : items) {
-            if (!item.name.equals("Good Wine") && itemIsNotABackstagePass(item)) {
+            if (itemIsNotAGoodWine(item) && itemIsNotABackstagePass(item)) {
                 if (item.quality > 0) {
                     if (itemIsNotALegendaryItem(item)) {
                         item.quality = item.quality - 1;
@@ -39,7 +39,7 @@ class GildedTros {
             }
 
             if (item.sellIn < 0) {
-                if (!item.name.equals("Good Wine")) {
+                if (itemIsNotAGoodWine(item)) {
                     if (itemIsNotABackstagePass(item)) {
                         if (item.quality > 0) {
                             if (itemIsNotALegendaryItem(item)) {
@@ -68,5 +68,9 @@ class GildedTros {
 
     private boolean itemIsNotALegendaryItem(Item item) {
         return !item.name.equals("B-DAWG Keychain");
+    }
+
+    private boolean itemIsNotAGoodWine(Item item) {
+        return !item.name.equals("Good Wine");
     }
 }
