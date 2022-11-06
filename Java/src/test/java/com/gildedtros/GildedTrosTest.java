@@ -3,6 +3,11 @@ package com.gildedtros;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,6 +50,34 @@ class GildedTrosTest {
             app.updateQuality();
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+    }
+
+    @Nested
+    @DisplayName("Item quality increases correctly")
+    class ItemQualityIncreasesCorrectly {
+
+        @ParameterizedTest
+        @MethodSource("provideSellInWithAddedQualityForGoodWine")
+        void givenTheItemGoodWineWithGivenSellIn_whenUpdateQuality_thenQualityFromItemIncreasedWithGivenValue(int sellIn, int addedQuality) {
+            int initialQuality = 40;
+            GildedTros app = newGildedTros("Good Wine", sellIn, initialQuality);
+            Item[] expectedItems = createItems("Good Wine", sellIn, initialQuality + addedQuality);
+
+            app.updateQuality();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
+        private static Stream<Arguments> provideSellInWithAddedQualityForGoodWine() {
+            return Stream.of(
+                    // Arguments.of(sellIn, addedQuality)
+                    Arguments.of(10, 1),
+                    Arguments.of(1, 1),
+                    Arguments.of(0, 2),
+                    Arguments.of(-1, 2),
+                    Arguments.of(-10, 2)
+            );
         }
     }
 
