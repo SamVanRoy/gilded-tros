@@ -36,6 +36,16 @@ class GildedTrosTest {
 
             assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
         }
+
+        @Test
+        void givenTheSellByDateHasPassed_whenUpdateQuality_thenQualityDegradesTwiceAsFast() {
+            GildedTros app = newGildedTros("Jupke", -1, 40);
+            Item[] expectedItems = createItems("Jupke", -1, 38);
+
+            app.updateQuality();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
     }
 
     private GildedTros newGildedTros(String itemName, int itemSellIn, int itemQuality) {
