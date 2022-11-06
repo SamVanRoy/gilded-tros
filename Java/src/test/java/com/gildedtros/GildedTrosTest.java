@@ -99,6 +99,51 @@ class GildedTrosTest {
                     Arguments.of(-10, 2)
             );
         }
+
+        @ParameterizedTest
+        @MethodSource("provideSellInWithAddedQualityForBackstagePassItems")
+        void givenABackstagePassItemWithGivenSellIn_whenUpdateQuality_thenQualityFromItemIncreasedWithGivenValue(int sellIn, int addedQuality) {
+            int initialQuality = 40;
+            GildedTros app = newGildedTros("Backstage passes for Re:Factor", sellIn, initialQuality);
+            Item[] expectedItems = createItems("Backstage passes for Re:Factor", sellIn, initialQuality + addedQuality);
+
+            app.updateQuality();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
+        private static Stream<Arguments> provideSellInWithAddedQualityForBackstagePassItems() {
+            return Stream.of(
+                    // Arguments.of(sellIn, addedQuality)
+                    Arguments.of(11, 1),
+                    Arguments.of(10, 2),
+                    Arguments.of(9, 2),
+                    Arguments.of(6, 2),
+                    Arguments.of(5, 3),
+                    Arguments.of(4, 3),
+                    Arguments.of(1, 3)
+            );
+        }
+
+        @ParameterizedTest
+        @MethodSource("provideSellInForBackstagePassItems")
+        void givenABackstagePassItemWithGivenSellIn_whenUpdateQuality_thenQualityFromItemDroppedTo0(int sellIn) {
+            GildedTros app = newGildedTros("Backstage passes for Re:Factor", sellIn, 40);
+            Item[] expectedItems = createItems("Backstage passes for Re:Factor", sellIn, 0);
+
+            app.updateQuality();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
+        private static Stream<Arguments> provideSellInForBackstagePassItems() {
+            return Stream.of(
+                    // Arguments.of(sellIn)
+                    Arguments.of(0),
+                    Arguments.of(-1),
+                    Arguments.of(-10)
+            );
+        }
     }
 
     private GildedTros newGildedTros(String itemName, int itemSellIn, int itemQuality) {
