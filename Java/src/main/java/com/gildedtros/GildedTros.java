@@ -10,7 +10,7 @@ class GildedTros {
         for (Item item : items) {
             if (!item.name.equals("Good Wine") && itemIsNotABackstagePass(item)) {
                 if (item.quality > 0) {
-                    if (!item.name.equals("B-DAWG Keychain")) {
+                    if (itemIsNotALegendaryItem(item)) {
                         item.quality = item.quality - 1;
                     }
                 }
@@ -34,7 +34,7 @@ class GildedTros {
                 }
             }
 
-            if (!item.name.equals("B-DAWG Keychain")) {
+            if (itemIsNotALegendaryItem(item)) {
                 item.sellIn = item.sellIn - 1;
             }
 
@@ -42,7 +42,7 @@ class GildedTros {
                 if (!item.name.equals("Good Wine")) {
                     if (itemIsNotABackstagePass(item)) {
                         if (item.quality > 0) {
-                            if (!item.name.equals("B-DAWG Keychain")) {
+                            if (itemIsNotALegendaryItem(item)) {
                                 item.quality = item.quality - 1;
                             }
                         }
@@ -64,5 +64,9 @@ class GildedTros {
 
     private boolean itemIsNotABackstagePass(Item item) {
         return !itemIsABackstagePass(item);
+    }
+
+    private boolean itemIsNotALegendaryItem(Item item) {
+        return !item.name.equals("B-DAWG Keychain");
     }
 }
