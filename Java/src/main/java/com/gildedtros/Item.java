@@ -1,5 +1,6 @@
 package com.gildedtros;
 
+// TODO SAM: talk to the QA guy in the corner to change properties to more clear descriptive var names
 public class Item {
 
     public String name;
