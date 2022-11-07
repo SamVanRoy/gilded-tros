@@ -1,5 +1,8 @@
 package com.gildedtros;
 
+import com.gildedtros.item.Item;
+import com.gildedtros.item.ItemWithQuality;
+import com.gildedtros.item.ItemWithQualityFactory;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;

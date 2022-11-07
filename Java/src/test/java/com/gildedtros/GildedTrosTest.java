@@ -1,5 +1,6 @@
 package com.gildedtros;
 
+import com.gildedtros.item.Item;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
