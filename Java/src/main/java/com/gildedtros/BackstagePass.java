@@ -18,5 +18,13 @@ public class BackstagePass implements ItemWithQuality {
         if (backstagePass.sellIn < 5) {
             increaseQualityFromItemByOne(backstagePass);
         }
+
+        if (backstagePass.sellIn < 0) {
+            dropQualityToZero();
+        }
+    }
+
+    private void dropQualityToZero() {
+        backstagePass.quality = 0;
     }
 }

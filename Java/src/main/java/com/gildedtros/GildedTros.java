@@ -28,8 +28,6 @@ class GildedTros {
                 if (itemIsNotAGoodWine(item)) {
                     if (itemIsNotABackstagePass(item)) {
                         degradeQualityFromItemByOne(item);
-                    } else {
-                        item.quality = 0;
                     }
                 } else {
                     increaseQualityFromItemByOne(item);
