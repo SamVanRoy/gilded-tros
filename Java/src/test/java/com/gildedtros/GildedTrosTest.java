@@ -54,6 +54,16 @@ class GildedTrosTest {
         }
 
         @Test
+        void givenAnItemWithQualityZero_whenUpdateInventory_thenQualityFromItemStaysZero() {
+            GildedTros app = newGildedTros("Jupke", 10, 0);
+            Item[] expectedItems = createItems("Jupke", 10, 0);
+
+            app.updateInventory();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
+        @Test
         void givenALegendaryItem_whenUpdateInventory_thenQualityFromItemNotDegraded() {
             GildedTros app = newGildedTros("B-DAWG Keychain", 10, 80);
             Item[] expectedItems = createItems("B-DAWG Keychain", 10, 80);
@@ -77,6 +87,26 @@ class GildedTrosTest {
     @Nested
     @DisplayName("Item quality increases correctly")
     class ItemQualityIncreasesCorrectly {
+
+        @ParameterizedTest
+        @MethodSource("provideItemNamesFromIncreasingQualityItems")
+        void givenAnIncreasingQualityItemWithMaxQuality_whenUpdateInventory_thenQualityFromItemStaysMaxQuality(String itemName) {
+            GildedTros app = newGildedTros(itemName, 10, 50);
+            Item[] expectedItems = createItems(itemName, 10, 50);
+
+            app.updateInventory();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
+        private static Stream<Arguments> provideItemNamesFromIncreasingQualityItems() {
+            return Stream.of(
+                    // Arguments.of(itemName)
+                    Arguments.of("Good Wine"),
+                    Arguments.of("Backstage passes for Re:Factor"),
+                    Arguments.of("Backstage passes for HAXX")
+            );
+        }
 
         @ParameterizedTest
         @MethodSource("provideSellInWithAddedQualityForGoodWine")
