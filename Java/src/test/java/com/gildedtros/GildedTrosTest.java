@@ -118,6 +118,16 @@ class GildedTrosTest {
     @DisplayName("Item quality increases correctly")
     class ItemQualityIncreasesCorrectly {
 
+        @Test
+        void givenAnItemWithAlmostMaxQuality_whenUpdateInventoryIncreasingQualityWithMoreThan1_thenQualityFromItemIsNeverAboveMaxQuality() {
+            GildedTros app = newGildedTros("Good Wine", -1, 49);
+            Item[] expectedItems = createItems("Good Wine", -1, 50);
+
+            app.updateInventory();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
         @ParameterizedTest
         @MethodSource("provideItemNamesFromIncreasingQualityItems")
         void givenAnIncreasingQualityItemWithMaxQuality_whenUpdateInventory_thenQualityFromItemStaysMaxQuality(String itemName) {
