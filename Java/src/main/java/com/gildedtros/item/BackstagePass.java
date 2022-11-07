@@ -3,7 +3,7 @@ package com.gildedtros.item;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class BackstagePass implements ItemWithQuality {
+public class BackstagePass implements ItemWithQuality, ItemWithIncreasingQuality {
 
     private final Item backstagePass;
 
