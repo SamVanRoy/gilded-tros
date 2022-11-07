@@ -17,7 +17,7 @@ class GildedTros {
                 item.sellIn -= 1;
             }
 
-            if (itemIsABackstagePass(item) || itemIsAGoodWine(item)) {
+            if (itemIsABackstagePass(item) || itemIsAGoodWine(item) || itemIsALegendaryItem(item)) {
                 updateQualityFromItem(item);
                 return;
             }
@@ -41,6 +41,10 @@ class GildedTros {
 
     private boolean itemIsNotALegendaryItem(Item item) {
         return !item.name.equals("B-DAWG Keychain");
+    }
+
+    private boolean itemIsALegendaryItem(Item item) {
+        return item.name.equals("B-DAWG Keychain");
     }
 
     private boolean itemIsAGoodWine(Item item) {

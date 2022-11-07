@@ -9,6 +9,9 @@ public class ItemWithQualityFactory {
         if (isAGoodWine(item.name))
             return new GoodWine(item);
 
+        if (isALegendaryItem(item.name))
+            return new LegendaryItem(item);
+
         return null;
     }
 
@@ -18,5 +21,9 @@ public class ItemWithQualityFactory {
 
     private static boolean isAGoodWine(String name) {
         return name.equals("Good Wine");
+    }
+
+    private static boolean isALegendaryItem(String name) {
+        return name.equals("B-DAWG Keychain");
     }
 }
