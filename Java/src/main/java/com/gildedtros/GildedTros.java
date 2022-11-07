@@ -14,21 +14,20 @@ class GildedTros {
                 item.sellIn -= 1;
             }
 
-            updateQualityFromItem(item);
+            if (itemIsABackstagePass(item)) {
+                updateQualityFromItem(item);
+                return;
+            }
 
-            if (itemIsNotAGoodWine(item) && itemIsNotABackstagePass(item)) {
+            if (itemIsNotAGoodWine(item)) {
                 degradeQualityFromItemByOne(item);
             } else {
-                if (itemIsNotABackstagePass(item)) {
-                    increaseQualityFromItemByOne(item);
-                }
+                increaseQualityFromItemByOne(item);
             }
 
             if (item.sellIn < 0) {
                 if (itemIsNotAGoodWine(item)) {
-                    if (itemIsNotABackstagePass(item)) {
-                        degradeQualityFromItemByOne(item);
-                    }
+                    degradeQualityFromItemByOne(item);
                 } else {
                     increaseQualityFromItemByOne(item);
                 }
@@ -43,10 +42,6 @@ class GildedTros {
 
     private boolean itemIsABackstagePass(Item item) {
         return item.name.equals("Backstage passes for Re:Factor") || item.name.equals("Backstage passes for HAXX");
-    }
-
-    private boolean itemIsNotABackstagePass(Item item) {
-        return !itemIsABackstagePass(item);
     }
 
     private boolean itemIsNotALegendaryItem(Item item) {
