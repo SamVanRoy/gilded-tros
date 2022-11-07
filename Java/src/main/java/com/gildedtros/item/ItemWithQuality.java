@@ -11,13 +11,7 @@ public interface ItemWithQuality {
 
     default void degradeQualityFromItemByOne(Item item) {
         if (item.quality > 0) {
-            if (itemIsNotALegendaryItem(item)) {
-                item.quality -= 1;
-            }
+            item.quality -= 1;
         }
-    }
-
-    private boolean itemIsNotALegendaryItem(Item item) {
-        return !item.name.equals("B-DAWG Keychain");
     }
 }

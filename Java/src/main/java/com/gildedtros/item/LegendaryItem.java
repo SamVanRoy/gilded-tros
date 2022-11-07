@@ -11,4 +11,9 @@ public class LegendaryItem implements ItemWithQuality {
     public void updateQuality() {
         legendaryItem.quality = 80;
     }
+
+    @Override
+    public void degradeQualityFromItemByOne(Item item) {
+        throw new UnsupportedOperationException("Legendary items do not degrade in Quality");
+    }
 }
