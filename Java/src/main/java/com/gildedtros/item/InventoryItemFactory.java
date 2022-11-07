@@ -3,11 +3,10 @@ package com.gildedtros.item;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 
 public class InventoryItemFactory {
 
-    private static final Map<String, Function<Item, InventoryItem>> INVENTORY_ITEM_MAP = Map.ofEntries(
+    private static final Map<String, InventoryItemCrafter> INVENTORY_ITEM_MAP = Map.ofEntries(
             new SimpleEntry<>("Backstage passes for Re:Factor", BackstagePass::new),
             new SimpleEntry<>("Backstage passes for HAXX", BackstagePass::new),
             new SimpleEntry<>("Good Wine", GoodWine::new),
@@ -24,6 +23,6 @@ public class InventoryItemFactory {
 
     private static Optional<InventoryItem> getItemFromInventoryItemMap(Item item) {
         return Optional.ofNullable(INVENTORY_ITEM_MAP.get(item.name))
-                .map(inventoryItem -> inventoryItem.apply(item));
+                .map(inventoryItem -> inventoryItem.craft(item));
     }
 }
