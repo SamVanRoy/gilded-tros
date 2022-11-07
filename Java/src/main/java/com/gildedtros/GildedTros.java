@@ -1,11 +1,8 @@
 package com.gildedtros;
 
 import com.gildedtros.item.Item;
-import com.gildedtros.item.ItemWithQuality;
 import com.gildedtros.item.ItemWithQualityFactory;
 import lombok.AllArgsConstructor;
-
-import java.util.Optional;
 
 @AllArgsConstructor
 class GildedTros {
@@ -25,8 +22,7 @@ class GildedTros {
     }
 
     private void updateQualityFromItem(Item item) {
-        Optional.ofNullable(ItemWithQualityFactory.getItemWithQuality(item))
-                .ifPresent(ItemWithQuality::updateQuality);
+        ItemWithQualityFactory.getItemWithQuality(item).updateQuality();
     }
 
     private boolean itemIsABackstagePass(Item item) {
