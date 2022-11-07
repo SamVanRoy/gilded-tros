@@ -1,36 +1,29 @@
 package com.gildedtros.item;
 
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+
 public class InventoryItemFactory {
 
+    private static final Map<String, Function<Item, InventoryItem>> INVENTORY_ITEM_MAP = Map.ofEntries(
+            new SimpleEntry<>("Backstage passes for Re:Factor", BackstagePass::new),
+            new SimpleEntry<>("Backstage passes for HAXX", BackstagePass::new),
+            new SimpleEntry<>("Good Wine", GoodWine::new),
+            new SimpleEntry<>("B-DAWG Keychain", LegendaryItem::new),
+            new SimpleEntry<>("Duplicate Code", SmellyItem::new),
+            new SimpleEntry<>("Long Methods", SmellyItem::new),
+            new SimpleEntry<>("Ugly Variable Names", SmellyItem::new)
+    );
+
     public static InventoryItem getInventoryItem(Item item) {
-        if (isABackstagePass(item.name))
-            return new BackstagePass(item);
-
-        if (isAGoodWine(item.name))
-            return new GoodWine(item);
-
-        if (isALegendaryItem(item.name))
-            return new LegendaryItem(item);
-
-        if (isASmellyItem(item.name))
-            return new SmellyItem(item);
-
-        return new NormalItem(item);
+        return getItemFromInventoryItemMap(item)
+                .orElseGet(() -> new NormalItem(item));
     }
 
-    private static boolean isABackstagePass(String name) {
-        return name.equals("Backstage passes for Re:Factor") || name.equals("Backstage passes for HAXX");
-    }
-
-    private static boolean isAGoodWine(String name) {
-        return name.equals("Good Wine");
-    }
-
-    private static boolean isALegendaryItem(String name) {
-        return name.equals("B-DAWG Keychain");
-    }
-
-    private static boolean isASmellyItem(String name) {
-        return name.equals("Duplicate Code") || name.equals("Long Methods") || name.equals("Ugly Variable Names");
+    private static Optional<InventoryItem> getItemFromInventoryItemMap(Item item) {
+        return Optional.ofNullable(INVENTORY_ITEM_MAP.get(item.name))
+                .map(inventoryItem -> inventoryItem.apply(item));
     }
 }
