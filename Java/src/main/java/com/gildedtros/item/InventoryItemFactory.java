@@ -12,6 +12,9 @@ public class InventoryItemFactory {
         if (isALegendaryItem(item.name))
             return new LegendaryItem(item);
 
+        if (isASmellyItem(item.name))
+            return new SmellyItem(item);
+
         return new NormalItem(item);
     }
 
@@ -25,5 +28,9 @@ public class InventoryItemFactory {
 
     private static boolean isALegendaryItem(String name) {
         return name.equals("B-DAWG Keychain");
+    }
+
+    private static boolean isASmellyItem(String name) {
+        return name.equals("Duplicate Code") || name.equals("Long Methods") || name.equals("Ugly Variable Names");
     }
 }

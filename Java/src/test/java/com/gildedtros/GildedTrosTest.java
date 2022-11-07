@@ -54,6 +54,26 @@ class GildedTrosTest {
         }
 
         @Test
+        void givenASmellyItemWithAQuality_whenUpdateInventory_thenQualityFromItemDegradedWith2() {
+            GildedTros app = newGildedTros("Duplicate Code", 10, 40);
+            Item[] expectedItems = createItems("Duplicate Code", 10, 38);
+
+            app.updateInventory();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
+        @Test
+        void givenASmellyItemAndTheSellByDateHasPassed_whenUpdateInventory_thenQualityDegradesTwiceAsFast() {
+            GildedTros app = newGildedTros("Duplicate Code", -1, 40);
+            Item[] expectedItems = createItems("Duplicate Code", -1, 36);
+
+            app.updateInventory();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
+        @Test
         void givenAnItemWithAlmostLowestQuality_whenUpdateInventoryDegradingQualityWithMoreThan1_thenQualityFromItemIsNeverUnderLowestQuality() {
             GildedTros app = newGildedTros("Duplicate Code", -1, 1);
             Item[] expectedItems = createItems("Duplicate Code", -1, 0);
