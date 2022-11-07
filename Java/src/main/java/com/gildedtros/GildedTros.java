@@ -10,6 +10,10 @@ class GildedTros {
 
     public void updateInventory() {
         for (Item item : items) {
+            if (itemIsNotALegendaryItem(item)) {
+                item.sellIn -= 1;
+            }
+
             updateQualityFromItem(item);
 
             if (itemIsNotAGoodWine(item) && itemIsNotABackstagePass(item)) {
@@ -18,10 +22,6 @@ class GildedTros {
                 if (itemIsNotABackstagePass(item)) {
                     increaseQualityFromItemByOne(item);
                 }
-            }
-
-            if (itemIsNotALegendaryItem(item)) {
-                item.sellIn -= 1;
             }
 
             if (item.sellIn < 0) {

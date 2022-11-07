@@ -11,11 +11,11 @@ public class BackstagePass implements ItemWithQuality {
     public void updateQuality() {
         increaseQualityFromItemByOne(backstagePass);
 
-        if (backstagePass.sellIn < 11) {
+        if (backstagePass.sellIn < 10) {
             increaseQualityFromItemByOne(backstagePass);
         }
 
-        if (backstagePass.sellIn < 6) {
+        if (backstagePass.sellIn < 5) {
             increaseQualityFromItemByOne(backstagePass);
         }
     }
