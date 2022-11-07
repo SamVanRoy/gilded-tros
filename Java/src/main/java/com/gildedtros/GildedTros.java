@@ -10,19 +10,16 @@ class GildedTros {
 
     public void updateInventory() {
         for (Item item : items) {
-            if (itemIsNotALegendaryItem(item)) {
-                item.sellIn -= 1;
-            }
-
+            decreaseSellByDayFromItem(item);
             updateQualityFromItem(item);
         }
     }
 
-    private void updateQualityFromItem(Item item) {
-        ItemWithQualityFactory.getItemWithQuality(item).updateQuality();
+    private void decreaseSellByDayFromItem(Item item) {
+        ItemWithQualityFactory.getItemWithQuality(item).decreaseSellByDayByOne(item);
     }
 
-    private boolean itemIsNotALegendaryItem(Item item) {
-        return !item.name.equals("B-DAWG Keychain");
+    private void updateQualityFromItem(Item item) {
+        ItemWithQualityFactory.getItemWithQuality(item).updateQuality();
     }
 }

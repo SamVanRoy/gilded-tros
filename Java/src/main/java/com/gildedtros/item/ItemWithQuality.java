@@ -14,4 +14,8 @@ public interface ItemWithQuality {
             item.quality -= 1;
         }
     }
+
+    default void decreaseSellByDayByOne(Item item) {
+        item.sellIn -= 1;
+    }
 }
