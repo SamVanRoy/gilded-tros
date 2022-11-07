@@ -3,7 +3,7 @@ package com.gildedtros.item;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class NormalItem implements ItemWithQuality, ItemWithDegradingQuality {
+public class NormalItem implements InventoryItem, ItemWithDegradingQuality {
 
     private final Item standardItem;
 

@@ -3,7 +3,7 @@ package com.gildedtros.item;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class GoodWine implements ItemWithQuality, ItemWithIncreasingQuality {
+public class GoodWine implements InventoryItem, ItemWithIncreasingQuality {
 
     private final Item goodWine;
 

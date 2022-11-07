@@ -3,7 +3,7 @@ package com.gildedtros.item;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class LegendaryItem implements ItemWithQuality {
+public class LegendaryItem implements InventoryItem {
 
     private final Item legendaryItem;
 

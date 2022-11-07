@@ -1,6 +1,6 @@
 package com.gildedtros.item;
 
-public interface ItemWithQuality {
+public interface InventoryItem {
     void updateQuality();
 
     default void decreaseSellByDayByOne(Item item) {

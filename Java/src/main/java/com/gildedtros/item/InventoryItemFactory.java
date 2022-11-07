@@ -1,8 +1,8 @@
 package com.gildedtros.item;
 
-public class ItemWithQualityFactory {
+public class InventoryItemFactory {
 
-    public static ItemWithQuality getItemWithQuality(Item item) {
+    public static InventoryItem getInventoryItem(Item item) {
         if (isABackstagePass(item.name))
             return new BackstagePass(item);
 

@@ -1,7 +1,7 @@
 package com.gildedtros;
 
+import com.gildedtros.item.InventoryItemFactory;
 import com.gildedtros.item.Item;
-import com.gildedtros.item.ItemWithQualityFactory;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -16,10 +16,10 @@ class GildedTros {
     }
 
     private void decreaseSellByDayFromItem(Item item) {
-        ItemWithQualityFactory.getItemWithQuality(item).decreaseSellByDayByOne(item);
+        InventoryItemFactory.getInventoryItem(item).decreaseSellByDayByOne(item);
     }
 
     private void updateQualityFromItem(Item item) {
-        ItemWithQualityFactory.getItemWithQuality(item).updateQuality();
+        InventoryItemFactory.getInventoryItem(item).updateQuality();
     }
 }
