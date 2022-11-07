@@ -22,18 +22,10 @@ class GildedTros {
                 return;
             }
 
-            if (itemIsNotAGoodWine(item)) {
-                degradeQualityFromItemByOne(item);
-            } else {
-                increaseQualityFromItemByOne(item);
-            }
+            degradeQualityFromItemByOne(item);
 
             if (item.sellIn < 0) {
-                if (itemIsNotAGoodWine(item)) {
-                    degradeQualityFromItemByOne(item);
-                } else {
-                    increaseQualityFromItemByOne(item);
-                }
+                degradeQualityFromItemByOne(item);
             }
         }
     }
@@ -51,18 +43,8 @@ class GildedTros {
         return !item.name.equals("B-DAWG Keychain");
     }
 
-    private boolean itemIsNotAGoodWine(Item item) {
-        return !item.name.equals("Good Wine");
-    }
-
     private boolean itemIsAGoodWine(Item item) {
         return item.name.equals("Good Wine");
-    }
-
-    private void increaseQualityFromItemByOne(Item item) {
-        if (item.quality < 50) {
-            item.quality += 1;
-        }
     }
 
     private void degradeQualityFromItemByOne(Item item) {
