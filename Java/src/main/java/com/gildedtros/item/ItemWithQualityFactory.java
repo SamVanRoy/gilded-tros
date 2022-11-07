@@ -12,7 +12,7 @@ public class ItemWithQualityFactory {
         if (isALegendaryItem(item.name))
             return new LegendaryItem(item);
 
-        return null;
+        return new NormalItem(item);
     }
 
     private static boolean isABackstagePass(String name) {
