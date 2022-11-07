@@ -17,7 +17,7 @@ class GildedTros {
                 item.sellIn -= 1;
             }
 
-            if (itemIsABackstagePass(item)) {
+            if (itemIsABackstagePass(item) || itemIsAGoodWine(item)) {
                 updateQualityFromItem(item);
                 return;
             }
@@ -53,6 +53,10 @@ class GildedTros {
 
     private boolean itemIsNotAGoodWine(Item item) {
         return !item.name.equals("Good Wine");
+    }
+
+    private boolean itemIsAGoodWine(Item item) {
+        return item.name.equals("Good Wine");
     }
 
     private void increaseQualityFromItemByOne(Item item) {
