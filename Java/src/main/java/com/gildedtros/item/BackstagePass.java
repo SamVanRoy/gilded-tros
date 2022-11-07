@@ -9,19 +9,19 @@ public class BackstagePass implements InventoryItem, ItemWithIncreasingQuality {
 
     @Override
     public void updateQuality() {
-        increaseQualityFromItemByOne(backstagePass);
-
-        if (backstagePass.sellIn < 10) {
-            increaseQualityFromItemByOne(backstagePass);
-        }
-
-        if (backstagePass.sellIn < 5) {
-            increaseQualityFromItemByOne(backstagePass);
-        }
-
-        if (backstagePass.sellIn < 0) {
+        if (isSellByDateUnder(0)) {
             dropQualityToZero();
+        } else if (isSellByDateUnder(5)) {
+            increaseQualityFromItemBy(backstagePass, 3);
+        } else if (isSellByDateUnder(10)) {
+            increaseQualityFromItemBy(backstagePass, 2);
+        } else {
+            increaseQualityFromItemByOne(backstagePass);
         }
+    }
+
+    private boolean isSellByDateUnder(int amountOfDaysLeft) {
+        return backstagePass.sellIn < amountOfDaysLeft;
     }
 
     private void dropQualityToZero() {
