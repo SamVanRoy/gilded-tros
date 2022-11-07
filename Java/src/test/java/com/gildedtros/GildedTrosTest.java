@@ -54,6 +54,16 @@ class GildedTrosTest {
         }
 
         @Test
+        void givenAnItemWithAlmostLowestQuality_whenUpdateInventoryDegradingQualityWithMoreThan1_thenQualityFromItemIsNeverUnderLowestQuality() {
+            GildedTros app = newGildedTros("Duplicate Code", -1, 1);
+            Item[] expectedItems = createItems("Duplicate Code", -1, 0);
+
+            app.updateInventory();
+
+            assertThat(app.items[0].quality).isEqualTo(expectedItems[0].quality);
+        }
+
+        @Test
         void givenAnItemWithQualityZero_whenUpdateInventory_thenQualityFromItemStaysZero() {
             GildedTros app = newGildedTros("Jupke", 10, 0);
             Item[] expectedItems = createItems("Jupke", 10, 0);
