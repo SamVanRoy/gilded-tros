@@ -9,10 +9,9 @@ public class GoodWine implements InventoryItem, ItemWithIncreasingQuality {
 
     @Override
     public void updateQuality() {
-        increaseQualityFromItemByOne(goodWine);
-
-        if (goodWine.sellIn < 0) {
+        if (goodWine.sellIn < 0)
+            increaseQualityFromItemBy(goodWine, 2);
+        else
             increaseQualityFromItemByOne(goodWine);
-        }
     }
 }

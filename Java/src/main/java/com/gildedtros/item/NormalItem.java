@@ -9,10 +9,9 @@ public class NormalItem implements InventoryItem, ItemWithDegradingQuality {
 
     @Override
     public void updateQuality() {
-        degradeQualityFromItemByOne(standardItem);
-
-        if (standardItem.sellIn < 0) {
+        if (standardItem.sellIn < 0)
+            degradeQualityFromItemBy(standardItem, 2);
+        else
             degradeQualityFromItemByOne(standardItem);
-        }
     }
 }
